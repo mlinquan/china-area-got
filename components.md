@@ -1,4 +1,4 @@
-# vue中不使用methods，优雅的使用省市区三级联动
+# vue中不使用methods，优雅地使用省市区三级联动
 
 ## 组件
 ### ChinaArea.vue
