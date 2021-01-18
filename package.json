@@ -1,0 +1,33 @@
+{
+  "name": "@mlinquan/china-area-got",
+  "version": "0.0.15",
+  "main": "index.js",
+  "author": "LinQuan",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "areaData2.js"
+  ],
+  "keywords": [
+    "行政区划",
+    "行政区划代码",
+    "行政区划数据",
+    "省市区",
+    "省市区代码",
+    "地区代码",
+    "地区数据",
+    "港澳台",
+    "三级联动",
+    "联动选择",
+    "离线数据",
+    "cascader",
+    "iview",
+    "element"
+  ],
+  "devDependencies": {
+    "axios": "^0.21.0",
+    "dayjs": "^1.9.6",
+    "for-more": "^1.0.1",
+    "iconv-lite": "^0.6.2"
+  }
+}
