@@ -4,7 +4,7 @@
 ### ChinaArea.vue
 ```html
 <template>
-  <components :is="tag" v-on="$listeners">
+  <components :is="tag">
     <slot name="default" v-bind="{ regionData }"></slot>
   </components>
 </template>
@@ -33,9 +33,31 @@ export default {
       }
     }
   },
+  watch: {
+    currtenVal(nv, ov) {
+      let rval = null
+      if (nv[1] !== ov[1]) {
+        rval = [nv[0], nv[1], null]
+      }
+      if (nv[0] !== ov[0]) {
+        rval = [nv[0], null, null]
+      }
+      if (rval) {
+        this.$emit('input', rval)
+      }
+      if (!rval) {
+        this.regionData = cnArea.init(nv)
+      }
+    }
+  },
   computed: {
-    regionData() {
-      return cnArea.init(this.value)
+    currtenVal() {
+      return JSON.parse(JSON.stringify(this.value))
+    }
+  },
+  data() {
+    return {
+      regionData: cnArea.init(this.value)
     }
   }
 }
