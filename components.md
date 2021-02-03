@@ -66,7 +66,7 @@ export default {
 
 ## 应用场景
 ### xxxx.vue
-单页多个省市联动，互补干扰和冲突，且不需要绑定change事件
+单页多个省市联动，互不干扰和冲突，且不需要绑定change事件
 ``` html
 <template>
   <div>
