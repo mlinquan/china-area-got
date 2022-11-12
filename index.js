@@ -97,7 +97,7 @@ ChinaArea.prototype.init = function(code, options) {
       let ccode = code.substr(2, 2)
       let ccode_n = parseInt(ccode).toString()
       let ccode_t = ccode_n.length % 2 ? ccode_n.padStart(ccode_n.length + 1, 0) : ccode_n
-      if(/\d{2}90/.test(code)) {
+      if(/^\d{2}90/.test(code)) {
         let keys = Object.keys(citys)
         ccode_t = keys[keys.length - 1]
         real_city = citys[ccode_t]

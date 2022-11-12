@@ -12,7 +12,7 @@ yarn add @mlinquan/china-area-got
 ```
 
 ### 此版本包含港澳台
-### 数据来源：2020年11月中华人民共和国县以上行政区划代码【中华人民共和国民政部】
+### 数据来源：[2020年12月中华人民共和国县以上行政区划代码【中华人民共和国民政部】](https://www.mca.gov.cn/article/sj/xzqh/2020/20201201.html)
 国家统计版（不包含港澳台）：https://www.npmjs.com/package/@mlinquan/china-area
 
 

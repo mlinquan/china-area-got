@@ -5,7 +5,7 @@
 ```html
 <template>
   <components :is="tag">
-    <slot name="default" v-bind="{ regionData }"></slot>
+    <slot name="default" v-bind="{ regionData }" />
   </components>
 </template>
 <script>
@@ -33,31 +33,45 @@ export default {
       }
     }
   },
-  watch: {
-    currtenVal(nv, ov) {
-      let rval = null
-      if (nv[1] !== ov[1]) {
-        rval = [nv[0], nv[1], null]
-      }
-      if (nv[0] !== ov[0]) {
-        rval = [nv[0], null, null]
-      }
-      if (rval) {
-        this.$emit('input', rval)
-      }
-      if (!rval) {
-        this.regionData = cnArea.init(nv)
-      }
-    }
-  },
-  computed: {
-    currtenVal() {
-      return JSON.parse(JSON.stringify(this.value))
-    }
-  },
   data() {
     return {
-      regionData: cnArea.init(this.value)
+      regionData: cnArea.init(this.value),
+      preEmitValue: null,
+      currentVal: null
+    }
+  },
+  watch: {
+    value: {
+      handler(nv, ov) {
+        /* if (ov === undefined) {
+          this.regionData = cnArea.init(nv)
+          return
+        } */
+        this.regionData = cnArea.init(nv)
+        // 单个省份的情况
+        if (typeof nv === 'string' || Array.isArray(nv) && nv.length === 1) {
+          return
+        }
+        const nvCopy = nv && [...nv] || [null, null, null]
+        const ovCopy = ov && [...ov] || [null, null, null]
+        const cityDiff = nvCopy[1] && nvCopy[2] && nvCopy[1].slice(0, 3) !== nvCopy[2].slice(0, 3) || (nvCopy[1] && this.preEmitValue && this.preEmitValue[1] && nvCopy[1] !== this.preEmitValue[1])
+        const provDiff = nvCopy[0] && nvCopy[1] && nvCopy[0].slice(0, 2) !== nvCopy[1].slice(0, 2) || (nvCopy[0] && this.preEmitValue && this.preEmitValue[0] && nvCopy[0] !== this.preEmitValue[0])
+        let rval = [...nvCopy]
+        if (cityDiff) {
+          rval = [nvCopy[0], nvCopy[1], null]
+        }
+        if (provDiff) {
+          rval = [nvCopy[0], null, null]
+        }
+        this.regionData = cnArea.init(rval)
+        this.preEmitValue = rval
+        if (nvCopy.toString() === rval.toString()) {
+          return
+        }
+        this.$emit('input', rval)
+      },
+      deep: true,
+      immediate: true
     }
   }
 }
